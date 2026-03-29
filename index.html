@@ -128,8 +128,8 @@
   <div class="container">
     <section class="hero">
       <span class="badge">Early access</span>
-      <h1>Your LLM bill is scaling faster than your revenue</h1>
-      <p class="subtitle">Cut your LLM API bill in half — no code changes required.</p>
+      <h1>Your LLM bill is growing faster than your product</h1>
+      <p class="subtitle">Cut your LLM API costs automatically — no code changes required.</p>
       
     <form class="signup-form" onsubmit="handleSubmit(event)">
       <input type="email" name="email" placeholder="your@email.com" required />
@@ -139,20 +139,28 @@
       &#10003; You're on the list — we'll be in touch!
     </p>
     <script>
-      function handleSubmit(e) {{
+      async function handleSubmit(e) {
         e.preventDefault();
+        const email = e.target.querySelector('input[type=email]').value;
+        try {
+          await fetch("https://cycadlike-invisibly-gaylene.ngrok-free.dev/signup", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email, project: "Promptware"})
+          });
+        } catch(_) {}
         document.querySelector('.signup-form').style.display = 'none';
         document.getElementById('submitted').style.display = 'block';
-      }}
+      }
     </script>
       <p class="signup-hint">No spam &middot; Unsubscribe anytime</p>
       <p class="price-note">Early access from <strong>$79/mo</strong> &mdash; lock in founder pricing</p>
     </section>
     
   <section class="features">
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Your Inference Bill</strong><p>Automatically cut LLM costs 40–70% with zero code changes.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><strong>Route to Cheapest Model</strong><p>Every query hits the cheapest model that can handle it.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span><strong>Full Cost Visibility</strong><p>Track spend by model, team, and endpoint in real time.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Your API Bill</strong><p>Cut LLM spend up to 70% with zero code changes.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><strong>Instant Smart Routing</strong><p>Automatically route queries to the cheapest capable model.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Visibility</strong><p>See exactly where every inference dollar is being spent.</p></div>
   </section>
   </div>
   <footer>Built by independent makers</footer>
