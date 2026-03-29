@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promptware</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+    .container { max-width: 640px; width: 100%; margin: 0 auto; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 5rem 0 2.5rem; }
+    .badge {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #7dd3fc;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      line-height: 1.65;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Signup form */
+    .signup-form {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 480px;
+      margin: 0 auto 1rem;
+    }
+    .signup-form input {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: #f1f5f9;
+      font-size: 1rem;
+      outline: none;
+    }
+    .signup-form input:focus { border-color: #38bdf8; }
+    .signup-form button {
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .signup-form button:hover { background: #38bdf8; }
+    .signup-hint {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #475569;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Price note */
+    .price-note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 3rem;
+    }
+    .price-note strong { color: #7dd3fc; }
+
+    /* Feature cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .card .icon { font-size: 1.6rem; display: block; margin-bottom: 0.6rem; }
+    .card strong { display: block; font-size: 0.95rem; margin-bottom: 0.35rem; color: #f1f5f9; }
+    .card p { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+
+    /* Footer */
+    footer { text-align: center; color: #334155; font-size: 0.8rem; padding-top: 1rem; }
+
+    @media (max-width: 480px) {
+      .signup-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">Early access</span>
+      <h1>Companies spending $10k–$100k+/mo on LLM API calls face exploding inference costs. Multiple independent builders (Switchpoint AI, PureRouter, Humiris, NadirClaw, RouteLLM by UC Berkeley/Anyscale) confirm the pain is real. Feb 2026 Reddit threads still active on honest LLM API cost comparisons. Enterprise teams want automated cost reduction with zero code changes — just swap the API endpoint.</h1>
+      <p class="subtitle">A system to reduce LLM inference costs via smart prompting (prompt compression, few-shot optimization), query routing (classify & route to cheapest capable model), prompt caching, and cost analytics dashboard. Positioned as a drop-in API gateway layer for teams spending $10k+/mo on LLM APIs.</p>
+      
+    <form class="signup-form" onsubmit="handleSubmit(event)">
+      <input type="email" name="email" placeholder="your@email.com" required />
+      <button type="submit">Join the waitlist &rarr;</button>
+    </form>
+    <p id="submitted" style="display:none;color:#4ade80;margin-top:1rem;text-align:center;">
+      &#10003; You're on the list — we'll be in touch!
+    </p>
+    <script>
+      function handleSubmit(e) {{
+        e.preventDefault();
+        document.querySelector('.signup-form').style.display = 'none';
+        document.getElementById('submitted').style.display = 'block';
+      }}
+    </script>
+      <p class="signup-hint">No spam &middot; Unsubscribe anytime</p>
+      <p class="price-note">Early access from <strong>$83/mo</strong> &mdash; lock in founder pricing</p>
+    </section>
+    
+  <section class="features">
+    <div class="card"><span class="icon">🔀</span><strong>Intelligent Model Routing</strong><p>Automatically routes each query to the cheapest capable model.</p></div>
+    <div class="card"><span class="icon">⚡</span><strong>Prompt Compression & Caching</strong><p>Shrinks token usage and caches repeated prompts instantly.</p></div>
+    <div class="card"><span class="icon">📊</span><strong>Real-Time Cost Analytics</strong><p>See exactly where your LLM spend goes, query by query.</p></div>
+  </section>
+  </div>
+  <footer>Built by independent makers</footer>
+</body>
+</html>
