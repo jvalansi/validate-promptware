@@ -37,10 +37,11 @@
       font-weight: 800;
       line-height: 1.15;
       margin-bottom: 1.25rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #7dd3fc 100%);
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      color: #ffffff;
     }
     .hero .subtitle {
       font-size: 1.15rem;
@@ -110,7 +111,8 @@
       border-radius: 12px;
       padding: 1.25rem;
     }
-    .card .icon { font-size: 1.6rem; display: block; margin-bottom: 0.6rem; }
+    .card .icon { display: block; margin-bottom: 0.75rem; width: 28px; height: 28px; }
+    .card .icon svg { width: 28px; height: 28px; }
     .card strong { display: block; font-size: 0.95rem; margin-bottom: 0.35rem; color: #f1f5f9; }
     .card p { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
 
@@ -126,8 +128,8 @@
   <div class="container">
     <section class="hero">
       <span class="badge">Early access</span>
-      <h1>Your LLM bill is growing faster than your revenue</h1>
-      <p class="subtitle">Cut your LLM API bill automatically — no code changes required.</p>
+      <h1>Your LLM bill is scaling faster than your revenue</h1>
+      <p class="subtitle">Cut your LLM API bill in half — no code changes required.</p>
       
     <form class="signup-form" onsubmit="handleSubmit(event)">
       <input type="email" name="email" placeholder="your@email.com" required />
@@ -148,9 +150,9 @@
     </section>
     
   <section class="features">
-    <div class="card"><span class="icon">🔀</span><strong>Smart Model Routing</strong><p>Automatically routes queries to the cheapest model that can handle them.</p></div>
-    <div class="card"><span class="icon">🗜️</span><strong>Prompt Compression & Caching</strong><p>Shrinks prompts and caches results to slash redundant token spend.</p></div>
-    <div class="card"><span class="icon">📊</span><strong>Real-Time Cost Analytics</strong><p>See exactly where your LLM budget goes and why.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Your Inference Bill</strong><p>Automatically cut LLM costs 40–70% with zero code changes.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><strong>Route to Cheapest Model</strong><p>Every query hits the cheapest model that can handle it.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span><strong>Full Cost Visibility</strong><p>Track spend by model, team, and endpoint in real time.</p></div>
   </section>
   </div>
   <footer>Built by independent makers</footer>
