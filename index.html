@@ -88,6 +88,14 @@
       color: #475569;
       margin-bottom: 2.5rem;
     }
+    .more-link {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #475569;
+      margin-top: 0.75rem;
+    }
+    .more-link a { color: #38bdf8; text-decoration: none; }
+    .more-link a:hover { text-decoration: underline; }
 
     /* Price note */
     .price-note {
@@ -128,21 +136,33 @@
   <div class="container">
     <section class="hero">
       <span class="badge">Early access</span>
-      <h1>Your LLM bill is growing faster than your product</h1>
-      <p class="subtitle">Cut your LLM API costs in half — no code changes required.</p>
+      <h1>Your LLM bill is growing faster than your revenue</h1>
+      <p class="subtitle">Cut your LLM API costs automatically — no code changes required.</p>
       
-    <iframe src="https://tally.so/embed/1AMe0b?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" width="100%" frameborder="0" marginheight="0" marginwidth="0"
-            style="border-radius:8px;min-height:300px;" onload="window.parent.scrollTo(0,0)">
-    </iframe>
-    <script src="https://tally.so/widgets/embed.js" async></script>
+    <form class="signup-form" onsubmit="handleSubmit(event)">
+      <input type="email" name="email" placeholder="your@email.com" required />
+      <button type="submit">Join the waitlist &rarr;</button>
+    </form>
+    <p id="submitted" style="display:none;color:#4ade80;margin-top:1rem;text-align:center;">
+      &#10003; You're on the list &mdash; we'll be in touch!
+    </p>
+    <p class="more-link" id="more-link" style="display:none">Got 30 seconds? <a href="https://tally.so/r/oboqkP" target="_blank">Tell us more about your use case &rarr;</a></p>
+    <script>
+      function handleSubmit(e) {
+        e.preventDefault();
+        document.querySelector('.signup-form').style.display = 'none';
+        document.getElementById('submitted').style.display = 'block';
+        document.getElementById('more-link').style.display = 'block';
+      }
+    </script>
       <p class="signup-hint">No spam &middot; Unsubscribe anytime</p>
       <p class="price-note">Early access from <strong>$79/mo</strong> &mdash; lock in founder pricing</p>
     </section>
     
   <section class="features">
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Inference Costs Automatically</strong><p>Cut LLM spend by up to 70% with zero code changes.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span><strong>Route to Cheapest Capable Model</strong><p>Queries auto-route to the least expensive model that meets quality requirements.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Analytics</strong><p>Spot waste instantly with a live dashboard tracking every API dollar spent.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash API Bills Automatically</strong><p>Cut LLM costs 40–70% with zero code changes.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><strong>Route to Cheapest Capable Model</strong><p>Every query hits the most cost-effective model that can handle it.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Analytics</strong><p>See exactly where your inference budget goes, instantly.</p></div>
   </section>
   </div>
   <footer>Built by independent makers</footer>
