@@ -88,14 +88,59 @@
       color: #475569;
       margin-bottom: 2.5rem;
     }
-    .more-link {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #475569;
-      margin-top: 0.75rem;
+    /* Multi-step form */
+    .step-q {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.75rem;
+      text-align: left;
     }
-    .more-link a { color: #38bdf8; text-decoration: none; }
-    .more-link a:hover { text-decoration: underline; }
+    .spend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .spend-opt {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.65rem 0.5rem;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: center;
+    }
+    .spend-opt:hover { border-color: #38bdf8; color: #f1f5f9; }
+    .spend-opt.selected { border-color: #38bdf8; background: #0f2d45; color: #f1f5f9; }
+    .role-input {
+      width: 100%;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 0.75rem;
+    }
+    .role-input:focus { border-color: #38bdf8; }
+    .submit-btn {
+      width: 100%;
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover:not(:disabled) { background: #38bdf8; }
+    .submit-btn:disabled { opacity: 0.4; cursor: default; }
 
     /* Price note */
     .price-note {
@@ -136,23 +181,62 @@
   <div class="container">
     <section class="hero">
       <span class="badge">Early access</span>
-      <h1>Your LLM bill is eating your margins alive</h1>
+      <h1>Your LLM bill is growing faster than your revenue</h1>
       <p class="subtitle">Cut your LLM API costs automatically — no code changes required.</p>
       
-    <form class="signup-form" onsubmit="handleSubmit(event)">
-      <input type="email" name="email" placeholder="your@email.com" required />
-      <button type="submit">Join the waitlist &rarr;</button>
+    <!-- Step 1: email -->
+    <form id="step1" class="signup-form" onsubmit="goStep2(event)">
+      <input type="email" id="email-val" placeholder="your@email.com" required />
+      <button type="submit">Continue &rarr;</button>
     </form>
-    <p id="submitted" style="display:none;color:#4ade80;margin-top:1rem;text-align:center;">
+
+    <!-- Step 2: spend + role -->
+    <div id="step2" style="display:none;max-width:480px;margin:0 auto;">
+      <p class="step-q">How much would you pay for Promptware?</p>
+      <div class="spend-grid">
+        <button type="button" class="spend-opt" onclick="selectSpend(this)">Less than $79/mo</button>
+        <button type="button" class="spend-opt" onclick="selectSpend(this)">Around $79/mo</button>
+        <button type="button" class="spend-opt" onclick="selectSpend(this)">More than $79/mo</button>
+        <button type="button" class="spend-opt" onclick="selectSpend(this)">Need to see it first</button>
+      </div>
+      <input id="role-val" type="text" class="role-input" placeholder="Your role (optional)" />
+      <button id="submit-btn" class="submit-btn" onclick="submitForm()" disabled>Join the waitlist &rarr;</button>
+    </div>
+
+    <!-- Done -->
+    <p id="done-msg" style="display:none;color:#4ade80;margin-top:1rem;text-align:center;font-size:1.05rem;">
       &#10003; You're on the list &mdash; we'll be in touch!
     </p>
-    <p class="more-link" id="more-link" style="display:none">Got 30 seconds? <a href="https://tally.so/r/44LMlo" target="_blank">Tell us more about your use case &rarr;</a></p>
+
     <script>
-      function handleSubmit(e) {
+      var selectedSpend = null;
+
+      function goStep2(e) {
         e.preventDefault();
-        document.querySelector('.signup-form').style.display = 'none';
-        document.getElementById('submitted').style.display = 'block';
-        document.getElementById('more-link').style.display = 'block';
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+      }
+
+      function selectSpend(btn) {
+        document.querySelectorAll('.spend-opt').forEach(function(b) {
+          b.classList.remove('selected');
+        });
+        btn.classList.add('selected');
+        selectedSpend = btn.textContent;
+        document.getElementById('submit-btn').disabled = false;
+      }
+
+      function submitForm() {
+        var email = document.getElementById('email-val').value;
+        var role  = document.getElementById('role-val').value;
+        var data  = { email: email, spend: selectedSpend, role: role, project: 'Promptware' };
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('done-msg').style.display = 'block';
+        fetch('https://formspree.io/f/xkoprppp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
       }
     </script>
       <p class="signup-hint">No spam &middot; Unsubscribe anytime</p>
@@ -160,8 +244,8 @@
     </section>
     
   <section class="features">
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Inference Costs Automatically</strong><p>Cut LLM spend 40–70% with zero code changes.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><strong>Route to Cheapest Capable Model</strong><p>Every query lands on the most cost-effective model automatically.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Inference Costs Automatically</strong><p>Cut LLM spend up to 70% with zero code changes.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span><strong>Route to Cheapest Capable Model</strong><p>Every query lands on the most cost-efficient model automatically.</p></div>
     <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Analytics</strong><p>See exactly where your LLM budget goes, instantly.</p></div>
   </section>
   </div>
