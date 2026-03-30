@@ -229,13 +229,17 @@
       function submitForm() {
         var email = document.getElementById('email-val').value;
         var role  = document.getElementById('role-val').value;
-        var data  = { email: email, spend: selectedSpend, role: role, project: 'Promptware' };
         document.getElementById('step2').style.display = 'none';
         document.getElementById('done-msg').style.display = 'block';
-        fetch('https://formspree.io/f/xkoprppp', {
+        var body = 'entry.49684355=' + encodeURIComponent(email)
+                 + '&entry.441218212=' + encodeURIComponent(selectedSpend)
+                 + '&entry.629651604='  + encodeURIComponent(role)
+                 + '&entry.202204044=' + encodeURIComponent('Promptware');
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSdcB5WBoYURDCSRP0LmlLmMnx4lL_n1Er2eKKsQ35HGvE5e2w/formResponse', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body
         });
       }
     </script>
@@ -244,9 +248,9 @@
     </section>
     
   <section class="features">
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Slash Inference Costs Automatically</strong><p>Cut LLM spend up to 70% with zero code changes.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span><strong>Route to Cheapest Capable Model</strong><p>Every query lands on the most cost-efficient model automatically.</p></div>
-    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Analytics</strong><p>See exactly where your LLM budget goes, instantly.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><strong>Cut LLM Bills Instantly</strong><p>Slash inference costs 40–70% with zero code changes.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><strong>Smart Model Routing</strong><p>Automatically routes each query to the cheapest capable model.</p></div>
+    <div class="card"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><strong>Real-Time Cost Visibility</strong><p>See exactly where every API dollar goes, instantly.</p></div>
   </section>
   </div>
   <footer>Built by independent makers</footer>
